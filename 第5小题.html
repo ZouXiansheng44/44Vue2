@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .show {color: white;background: #717181;}
+    .main{border:1px solid #717181;width:800px;height:350px; font-size: 18px; margin-left: 450px; margin-top: auto;box-shadow: 0 2px 6px ;}
+    .table{color:black;width:800px;height:40px;}
+    .ul{width: 100%;display: flex;list-style: none;line-height: 40px;border:1px solid #717181;padding: 0;margin: 0;}
+        .li{flex: 1;text-align: center;}
+    </style>
+</head>
+<body>
+<div id="app">
+    <my-table :head="title1" :body="content1" ></my-table>
+    <p></p>
+    <my-table :head="title2" :body="content2" ></my-table>
+</div>
+<script>
+    var MyTable={
+        template:`
+        <div class="main">
+        <div class="table">
+          <ul class="ul">
+            <li v-for="(item,index) in head" :key="index"  :class="{show:num==index}" @click="findShow(index)" class="li">
+              {{item}}
+            </li>
+          </ul>
+        </div>
+        <div>
+      <div v-for='(itemContent,index) in body' v-show="index == num">
+        {{itemContent}}
+      </div>
+    </div>
+  </div> `,
+        props:['head','body'],
+        data(){
+            return{num: 0}
+        },
+        methods:{
+            findShow(index) {
+                this.num = index;
+            }
+        },
+    }
+    new Vue({
+        el:'#app',
+        data(){
+            return{
+                title1: ["选项卡1", "选项卡2", "选项卡3"],
+                content1: ["这是选项卡1的内容", "这是选项卡2的内容", "这是选项卡3的内容"],
+                title2: ["京东超市", "数码电器", "服装美饰","京东生鲜"],
+                content2: ["时令生鲜 休闲零食 粮油调味", "电脑 手机 耳机", "冬装 秋装 男装 女装", "鸡肉 猪肉 牛肉"],
+            }
+        },
+        components:{MyTable}
+    })
+</script>
+</body>
+</html>

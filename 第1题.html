@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-input></my-input>
+</div>
+</body>
+<script>
+    var MyInput = {
+        template:`<div><button @click="handleReduce">-</button><input type="text" v-model="count" v-focus v-html="msg"><button @click="handleAdd">+</button></div>`,
+        data(){
+            return{
+                count:'1'
+            }
+        },
+        methods:{
+            handleAdd(){
+                this.count++
+            },
+            handleReduce(){
+                if(this.count>1)
+                    this.count--;
+                else
+                    alert("数量为1，不能再减")
+            }
+        },
+        directives: {
+            focus:function (element) {
+                element.focus();
+            }
+        },
+        computed:{
+            msg(){
+                var reg = new RegExp(/^[1-9]\d*$/);
+                if (!reg.test(this.count)){
+                    alert('输入数据不合法');
+                    focus();
+                    this.count=1;
+                }
+                else if(this.count<0){
+                    alert('输入数据不合法');
+                    focus();
+                    this.count=1;
+                }
+            }
+        }
+    }
+    new Vue({
+        el:'#app',
+        components:{
+            'my-input':MyInput
+        }
+    })
+</script>
+</html>

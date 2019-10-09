@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-click></my-click>
+</div>
+</body>
+<script>
+    var MyClick=
+        {
+        template:`<div><button @click="handleClick" :style="style" @mouseover="mouseOver"  @mouseleave="mouseLeave">{{click}}</button></div>`,
+        data()
+        {
+            return{
+                click:"点我一下",
+                style:'background:while;width:100px;height:35px;border:1px solid blue;margin-left:800px'//
+            }
+        },
+        methods:
+            {
+            handleClick()
+            {
+                alert(this.click)
+            },
+            mouseOver()
+            {
+                this.style = 'background: blue;color: white;width:100px;height:35px;border:1px solid blue;color:while;margin-left:800px';
+            },
+            mouseLeave()
+            {
+                this.style = 'width:100px;height:35px;border:1px solid blue;margin-left:800px'
+            }
+        }
+    }
+    new Vue
+    ({
+        el:'#app',
+        components:
+            {
+            'my-click':MyClick
+        }
+    })
+</script>
+</html>
